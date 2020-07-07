@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary"><b>Surf Shop</b></ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="danger" (click)="logout()">
+        Sair
+        <ion-icon slot="end" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="!produtos.length">
+    <ion-item *ngFor="let item of [0, 1, 2, 3, 4]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let produto of produtos">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img *ngIf="produto.picture" [src]="produto.picture">
+          <img *ngIf="!produto.picture" src="https://img.icons8.com/wired/2x/question-mark.png">
+        </ion-avatar>
+
+        <ion-label>
+          <ion-text color="primary">{{ produto.name }}</ion-text>
+          <p>{{ produto.description }}</p>
+          <p>{{ produto.createdAt | date: 'short' }}</p>
+        </ion-label>
+
+        <ion-note color="primary" slot="end" *ngIf="produto.price">{{ produto.price | currency: 'BRL' }}</ion-note>
+      </ion-item>
+
+      <ion-item-options *ngIf="authService.getAuth().currentUser.uid == produto.userId" side="end">
+        <ion-item-option color="danger" (click)="deleteProduct(produto.id)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+          Excluir
+        </ion-item-option>
+
+      </ion-item-options>
+      <ion-item-options *ngIf="authService.getAuth().currentUser.uid == produto.userId" side="start">
+        <ion-item-option color="medium" [routerLink]="['/details', produto.id]">
+          <ion-icon slot="top" name="create"></ion-icon>
+          Editar
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" routerLink="/details">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

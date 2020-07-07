@@ -1,0 +1,81 @@
+.container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 75%;
+  margin: 0 auto;
+
+  &.top {
+    z-index: 2;
+    top: 2%;
+
+    img {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  &.bottom {
+    z-index: 0;
+    bottom: 20%;
+
+    span {
+      color: #fff;
+    }
+  }
+}
+
+body.keyboard-is-open .hide-on-keyboard-open {
+  display: none;
+}
+
+body.keyboard-is-open .scroll-content {
+  margin-bottom: 0 !important;
+}
+
+ion-slides {
+  height: 100%;
+
+  .slide-inner {
+    width: 75%;
+    color: #fff;
+    background-color: #0072bc;
+    border-radius: 8px;
+
+    ion-button {
+      --color: white;
+      --border-color: white;
+      --border-width: 1px;
+      --border-radius: 8px;
+    }
+
+    ion-item {
+      --background: rgba(128, 38, 38, 0.2);
+      --border-radius: 8px;
+
+      ion-input {
+        --color: #fff;
+      }
+    }
+  }
+}
+
+.fundo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background-color: #3c9ddc;
+
+  .onda {
+    position: absolute;
+    top: -45%;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background-image: url("/assets/img/onda.png");
+    background-size: contain;
+    transition: all 0.8s;
+  }
+}
